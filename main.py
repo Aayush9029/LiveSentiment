@@ -145,20 +145,10 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Send and receive Twitch chat messages over IRC with python web sockets. For more info, go to https://dev.twitch.tv/docs/irc/guide')
 
 	parser.add_argument('channel_name', help='Twitch channel name (username)')
-	parser.add_argument('-timeout','-t', default=None, type=float, help='time in seconds needed to close connection after not receiving any new data (default: None = no timeout)')
-	parser.add_argument('-message_timeout','-mt', default=1.0, type=float, help='time in seconds between checks for new data (default: 1 second)')
-	parser.add_argument('-buffer_size','-b', default=8192, type=int, help='buffer size (default: 8192 bytes = 8 KB)')
-	parser.add_argument('-message_limit','-l', default=None, type=int, help='maximum amount of messages to get (default: None = unlimited)')
-	
-	parser.add_argument('-username','-u', default=None, help='username (default: None)')
-	parser.add_argument('-oauth', '-password','-p', default=None, help='oath token (default: None). Get custom one from https://twitchapps.com/tmi/')
-	
-	parser.add_argument('--send', action='store_true', help='send mode (default: False)')
-	parser.add_argument('-output','-o', default=None, help='output file (default: None = print to standard output)')
 
 	args = parser.parse_args()
 	
-	twitch_chat_irc = TwitchChatIRC(username=args.username,password=args.oauth)
+	twitch_chat_irc = TwitchChatIRC()
 
 	if(args.send):
 		if(twitch_chat_irc.is_default_user()):
